@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Prediction</title>
+    <style>
+        /* Global Reset */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    color: #2c3e50;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background: #3498db;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+/* Result Section */
+.result {
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.result h2 {
+    color: #2c3e50;
+}
+
+.result span {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Salary Prediction System</h1>
+        <p>Enter your details below to estimate your salary.</p>
+
+        <form method="POST">
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" required placeholder="Enter your name">
+
+            <label for="company">Company Name:</label>
+            <input type="text" name="company" required placeholder="Enter company name">
+
+            <label for="years_experience">Years of Experience:</label>
+            <input type="number" name="years_experience" step="0.1" required placeholder="Enter years of experience">
+
+            <button type="submit">Predict Salary</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                <h2>Hello, {{ name }}!</h2>
+                <p>At <strong>{{ company }}</strong>, based on your <strong>{{ years_experience }} years</strong> of experience,</p>
+                <h3>Your Estimated Salary: <span>${{ prediction }}</span></h3>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
